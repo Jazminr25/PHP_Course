@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Launch Panel</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function TakeOff() {
+                try {
+                    statusInd = document.getElementById('status');
+                    statusInd.innerHTML = "";
+                    if (document.getElementById('ECOn').checked) {
+                        statusInd.innerHTML += "<li>Too much engine Coolant, cannot keep engines hot</li>";
+                        return false;
+                    }
+                    if (document.getElementById('Burn').value < 20) {
+                        statusInd.innerHTML += "<li>Burn is too low</li>";
+                        return false;
+                    } else if (document.getElementById('Burn').value > 30) {
+                        statusInd.innerHTML += "<li>Burn is too high</li>";
+                        return false;
+                    } else {
+
+                        statusInd.innerHTML += "<li>Burn is just right</li>";
+
+                    }
+                    codeString = document.getElementById('Code').value;
+                    if (codeString != "") {
+                        statusInd.innerHTML += "<li>" + codeString.toUpperCase() + "</li>";
+                    } else {
+                        statusInd.innerHTML += "<li>You are missing a Launch Code</li>";
+                        return false;
+                    }
+                    for (i = 10; i > 0; i--) {
+                        statusInd.innerHTML += "<li>" + i + "</li>";
+
+                    }
+                    statusInd.innerHTML += "<li>Launch</li>";
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div>Set all the ship setting correctly and you can launch</div>
+
+        <label>On</label><input type="radio" value="On" checked id="ECOn" name="EC"> <label>Off</label><input type="radio" value="Off" id="ECOff" name="EC">Engine Coolant<br>
+        <input type="number" name="Burn" id="Burn">Fuel Burn Time In launch(1-100%)<br>
+        <input type="text" name="Code" id="Code">Code
+        <button id="Launch" name="Launch" onclick="return TakeOff();">Launch</button>
+        <div>
+            <ul id="status">
+
+            </ul>
+        </div>
+    </body>
+</html>
