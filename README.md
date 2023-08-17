@@ -1,2 +1,2 @@
 # PHP_Course
-Coursework from SLCC course PHP Course
+Coursework from course PHP Course
